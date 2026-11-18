@@ -1,15 +1,24 @@
 <div class="page-header">
     <div>
-        <h1 class="page-header-title">📋 Chamada Digital</h1>
+        <h1 class="page-header-title">
+            <span class="header-icon">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                    <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                    <polyline points="9 13 11 15 15 11"></polyline>
+                </svg>
+            </span>
+            <span>Chamada Digital Escolar</span>
+        </h1>
         <p class="breadcrumb-info">Registro diário de frequência nominal por turma e data</p>
     </div>
 </div>
 
 <div class="card">
     <div class="card-header">
-        <h3>Status das Turmas Hoje (<?= formatDate(date('Y-m-d')) ?>)</h3>
+        <h3>Quadro das Turmas Hoje (<?= formatDate(date('Y-m-d')) ?>)</h3>
     </div>
-    <div class="card-body">
+    <div class="card-body" style="padding: 0;">
         <div class="table-container">
             <table>
                 <thead>
@@ -20,7 +29,7 @@
                         <th>Total Alunos</th>
                         <th>Status da Chamada</th>
                         <th>Horários</th>
-                        <th>Ações</th>
+                        <th style="text-align: right;">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -51,7 +60,7 @@
                                     <small style="color: var(--text-light);">-</small>
                                 <?php endif; ?>
                             </td>
-                            <td>
+                            <td style="text-align: right;">
                                 <?php if (empty($t->chamada_id)): ?>
                                     <?php if (Middleware::hasRole('admin') || Middleware::hasRole('inspetor')): ?>
                                         <a href="<?= BASE_URL ?>/chamadas/abrir/<?= $t->id ?>" class="btn btn-primary btn-sm">Abrir Chamada</a>
@@ -76,10 +85,15 @@
     <div class="card-header">
         <h3>Histórico de Chamadas Registradas Hoje</h3>
     </div>
-    <div class="card-body">
+    <div class="card-body" style="padding: 0;">
         <?php if (empty($chamadas)): ?>
             <div class="empty-state">
-                <div class="empty-state-icon">📋</div>
+                <div class="empty-state-icon">
+                    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                        <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                    </svg>
+                </div>
                 <div class="empty-state-title">Nenhuma chamada iniciada ainda hoje</div>
                 <p>Abra a chamada de uma das turmas acima para iniciar o fluxo.</p>
             </div>
@@ -95,7 +109,7 @@
                             <th>Justificados</th>
                             <th>Responsável</th>
                             <th>Situação</th>
-                            <th>Ações</th>
+                            <th style="text-align: right;">Ações</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -114,7 +128,7 @@
                                         <span class="badge badge-warning">Em Registro</span>
                                     <?php endif; ?>
                                 </td>
-                                <td>
+                                <td style="text-align: right;">
                                     <a href="<?= BASE_URL ?>/chamadas/visualizar/<?= $ch->id ?>" class="btn btn-outline btn-sm">Visualizar</a>
                                 </td>
                             </tr>

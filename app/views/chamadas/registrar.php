@@ -1,13 +1,33 @@
 <div class="page-header">
     <div>
-        <h1 class="page-header-title">📋 Registro de Chamada: Turma <?= sanitize($chamada->turma_nome) ?></h1>
+        <h1 class="page-header-title">
+            <span class="header-icon">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                    <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                    <polyline points="9 13 11 15 15 11"></polyline>
+                </svg>
+            </span>
+            <span>Registro de Chamada: Turma <?= sanitize($chamada->turma_nome) ?></span>
+        </h1>
         <p class="breadcrumb-info">
-            <?= sanitize($chamada->serie) ?> • Turno <?= ucfirst(sanitize($chamada->turno)) ?> • Data: <?= formatDate($chamada->data) ?>
+            <?= sanitize($chamada->serie) ?> • Turno <?= ucfirst(sanitize($chamada->turno)) ?> • Data: <strong><?= formatDate($chamada->data) ?></strong>
         </p>
     </div>
     <div class="page-header-actions">
-        <button type="button" id="btn-marcar-todos-presentes" class="btn btn-success btn-sm">Marcar Todos Presentes</button>
-        <button type="button" id="btn-marcar-todos-ausentes" class="btn btn-outline btn-sm">Marcar Todos Ausentes</button>
+        <button type="button" id="btn-marcar-todos-presentes" class="btn btn-success btn-sm">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span>Marcar Todos Presentes</span>
+        </button>
+        <button type="button" id="btn-marcar-todos-ausentes" class="btn btn-outline btn-sm">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+            <span>Marcar Todos Ausentes</span>
+        </button>
         <a href="<?= BASE_URL ?>/chamadas" class="btn btn-outline btn-sm">Voltar</a>
     </div>
 </div>
@@ -19,7 +39,7 @@
         <div class="card-header">
             <h3>Lista Nominal de Estudantes (<?= count($alunos) ?> matriculados)</h3>
             <span style="font-size: 0.85rem; color: var(--text-muted);">
-                Abertura: <?= formatDateTime($chamada->aberta_em) ?> por <?= sanitize($chamada->usuario_nome) ?>
+                Abertura: <strong><?= formatDateTime($chamada->aberta_em) ?></strong> por <?= sanitize($chamada->usuario_nome) ?>
             </span>
         </div>
         <div class="card-body" style="padding: 0;">
@@ -27,7 +47,7 @@
                 <table>
                     <thead>
                         <tr>
-                            <th style="width: 80px;">Nº / Matr.</th>
+                            <th style="width: 90px;">Nº / Matr.</th>
                             <th>Nome do Aluno</th>
                             <th style="width: 320px;">Situação de Presença</th>
                             <th>Observações / Justificativa</th>
@@ -72,8 +92,8 @@
                                 </td>
                                 <td>
                                     <input type="text" name="observacao[<?= $aluno->id ?>]" class="form-control" 
-                                           style="padding: 0.35rem 0.65rem; font-size: 0.85rem;" 
-                                           placeholder="Ex: Atestado médico, saída antecipada..." 
+                                           style="padding: 0.4rem 0.75rem; font-size: 0.86rem;" 
+                                           placeholder="Ex: Atestado médico, consulta, saída..." 
                                            value="<?= sanitize($obsAtual ?? '') ?>">
                                 </td>
                             </tr>
@@ -82,17 +102,20 @@
                 </table>
             </div>
         </div>
-        <div class="card-footer" style="padding: 1.25rem; background-color: #fafafa; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: gap; gap: 1rem;">
+        <div class="card-footer" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
             <div>
                 <span style="font-size: 0.85rem; color: var(--text-muted);">
-                    ⚠️ Ao <strong>Concluir Chamada</strong>, a previsão consolidada da Cozinha é atualizada com os números oficiais.
+                    Ao <strong>Concluir Chamada</strong>, a previsão oficial da Cozinha é sincronizada imediatamente.
                 </span>
             </div>
             <div style="display: flex; gap: 0.75rem;">
                 <button type="submit" name="acao" value="salvar" class="btn btn-outline">Salvar como Rascunho</button>
                 <button type="submit" name="acao" value="concluir" class="btn btn-primary btn-lg" 
-                        onclick="return confirm('Deseja realmente CONCLUIR esta chamada? A informação de presença será finalizada e sincronizada com a Cozinha.');">
-                    ✅ Concluir Chamada
+                        onclick="return confirm('Deseja CONCLUIR esta chamada? A informação de presença será finalizada e sincronizada com a Cozinha.');">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    <span>Concluir Chamada</span>
                 </button>
             </div>
         </div>

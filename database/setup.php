@@ -13,10 +13,15 @@ require_once ROOT_PATH . '/config/config.php';
 echo "=== Configurando banco de dados: " . DB_NAME . " ===\n";
 
 try {
-    // Conecta sem selecionar banco para criá-lo se não existir
+    // Conecta ao servidor MySQL
     $pdo = new PDO('mysql:host=' . DB_HOST . ';charset=' . DB_CHARSET, DB_USER, DB_PASS, [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
     ]);
+
+    echo "0. Reinicializando banco de dados " . DB_NAME . "...\n";
+    $pdo->exec("DROP DATABASE IF EXISTS " . DB_NAME);
+    $pdo->exec("CREATE DATABASE " . DB_NAME . " CHARACTER SET " . DB_CHARSET . " COLLATE utf8mb4_unicode_ci");
+    $pdo->exec("USE " . DB_NAME);
 
     echo "1. Executando schema.sql...\n";
     $schemaSql = file_get_contents(ROOT_PATH . '/database/schema.sql');

@@ -2,13 +2,13 @@
 
 /**
  * Configurações gerais da aplicação
- * Define constantes utilizadas em todo o sistema
+ * VIVALCRIS - Central de Frequência e Alimentação Escolar
  *
  * @package FeiraTecG1
  */
 
 // Nome da aplicação
-define('APP_NAME', 'Central de Frequência e Alimentação');
+define('APP_NAME', 'Vivalcris | Frequência & Alimentação Escolar');
 
 // Versão da aplicação
 define('APP_VERSION', '1.0.0');

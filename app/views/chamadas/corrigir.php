@@ -1,12 +1,19 @@
 <div class="page-header">
     <div>
-        <h1 class="page-header-title">🛡️ Correção Autorizada de Frequência</h1>
+        <h1 class="page-header-title">
+            <span class="header-icon">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+            </span>
+            <span>Correção Autorizada de Frequência</span>
+        </h1>
         <p class="breadcrumb-info">
-            Turma: <?= sanitize($chamada->turma_nome) ?> • Data: <?= formatDate($chamada->data) ?>
+            Turma: <?= sanitize($chamada->turma_nome) ?> • Data: <strong><?= formatDate($chamada->data) ?></strong>
         </p>
     </div>
     <div class="page-header-actions">
-        <a href="<?= BASE_URL ?>/chamadas/visualizar/<?= $chamada->id ?>" class="btn btn-outline">Voltar à Chamada</a>
+        <a href="<?= BASE_URL ?>/chamadas/visualizar/<?= $chamada->id ?>" class="btn btn-outline btn-sm">Voltar à Chamada</a>
     </div>
 </div>
 
@@ -15,9 +22,9 @@
         <h3>Alteração com Trilha de Auditoria Obrigatória</h3>
     </div>
     <div class="card-body">
-        <div style="background-color: #f8fafc; border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 1rem; margin-bottom: 1.25rem;">
+        <div style="background-color: #FAF7F2; border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 1.1rem; margin-bottom: 1.35rem;">
             <div><strong>Aluno:</strong> <?= sanitize($aluno->nome) ?> (Matrícula: <code><?= sanitize($aluno->matricula_codigo) ?></code>)</div>
-            <div style="margin-top: 0.25rem;">
+            <div style="margin-top: 0.35rem;">
                 <strong>Situação Atual:</strong> 
                 <?php if ($frequencia->situacao === 'presente'): ?>
                     <span class="badge badge-success">Presente</span>
@@ -28,7 +35,7 @@
                 <?php endif; ?>
             </div>
             <?php if (!empty($frequencia->observacao)): ?>
-                <div style="margin-top: 0.25rem; font-size: 0.85rem; color: var(--text-muted);">
+                <div style="margin-top: 0.35rem; font-size: 0.85rem; color: var(--text-muted);">
                     <strong>Observação anterior:</strong> <?= sanitize($frequencia->observacao) ?>
                 </div>
             <?php endif; ?>
@@ -50,7 +57,7 @@
                 <label for="observacao" class="form-label">Nova Observação (Opcional)</label>
                 <input type="text" id="observacao" name="observacao" class="form-control" 
                        value="<?= sanitize($frequencia->observacao ?? '') ?>" 
-                       placeholder="Ex: Atestado entregue na secretaria na 2ª aula">
+                       placeholder="Ex: Atestado entregue na coordenação após o fechamento">
             </div>
 
             <div class="form-group">
@@ -58,7 +65,7 @@
                 <textarea id="justificativa" name="justificativa" class="form-control" rows="3" required 
                           placeholder="Informe detalhadamente o motivo da correção após o fechamento da chamada..."><?= old('justificativa') ?></textarea>
                 <div class="form-help">
-                    🛡️ <strong>Regra de Auditoria:</strong> Esta alteração será gravada permanentemente na tabela <code>historico_alteracao</code> com seu nome de usuário (<?= sanitize($_SESSION['usuario_nome'] ?? '') ?>), data, horário, valor anterior e valor novo.
+                    <strong>Regra de Auditoria:</strong> Esta alteração será gravada permanentemente na tabela <code>historico_alteracao</code> com seu nome de usuário (<?= sanitize($_SESSION['usuario_nome'] ?? '') ?>), data, horário, valor anterior e valor novo.
                 </div>
             </div>
 

@@ -1,19 +1,28 @@
 /* ==========================================================================
-   Central de Frequência e Alimentação Escolar
-   Estilos da Tela de Autenticação (Login)
+   VIVALCRIS - Central de Frequência e Alimentação Escolar
+   Tela de Login com Identidade Visual Oficial
+   Cores: Laranja (#F58220) | Laranja Claro (#FFB568) | Branco (#FFFFFF) | Grafite (#333333)
    ========================================================================== */
 
 :root {
-    --primary: #1e40af;
-    --primary-hover: #1d4ed8;
-    --primary-light: #dbeafe;
-    --text-main: #0f172a;
-    --text-muted: #64748b;
-    --border: #e2e8f0;
-    --border-dark: #cbd5e1;
-    --radius-md: 12px;
+    --color-laranja: #F58220;
+    --color-laranja-claro: #FFB568;
+    --color-branco: #FFFFFF;
+    --color-grafite: #333333;
+
+    --primary: #F58220;
+    --primary-hover: #E06D0C;
+    --primary-light: #FFF5EB;
+    --text-main: #333333;
+    --text-heading: #1F1F1F;
+    --text-muted: #666666;
+    --border: #E8E2D8;
+    --border-dark: #D4CCC0;
+    --radius-lg: 16px;
+    --radius-md: 10px;
     --radius-sm: 6px;
-    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    --radius-pill: 9999px;
+    --shadow-card: 0 16px 40px -8px rgba(51, 51, 51, 0.18), 0 4px 12px rgba(51, 51, 51, 0.08);
 }
 
 *, *::before, *::after {
@@ -23,23 +32,42 @@
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #3b82f6 100%);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: var(--color-grafite);
+    background-image: 
+        radial-gradient(circle at 15% 20%, rgba(245, 130, 32, 0.28) 0%, transparent 45%),
+        radial-gradient(circle at 85% 80%, rgba(255, 181, 104, 0.2) 0%, transparent 50%),
+        linear-gradient(135deg, #262626 0%, #333333 100%);
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 1.5rem;
+    padding: 2rem 1.25rem;
     color: var(--text-main);
+    -webkit-font-smoothing: antialiased;
 }
 
 .login-card {
-    background-color: #ffffff;
+    background-color: var(--color-branco);
     width: 100%;
-    max-width: 440px;
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-xl);
-    padding: 2.5rem 2rem;
+    max-width: 460px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    padding: 2.8rem 2.4rem;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.login-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, var(--color-laranja) 0%, var(--color-laranja-claro) 100%);
+    border-top-left-radius: var(--radius-lg);
+    border-top-right-radius: var(--radius-lg);
 }
 
 .login-header {
@@ -48,137 +76,181 @@ body {
 }
 
 .login-logo {
-    width: 56px;
-    height: 56px;
-    margin-bottom: 1rem;
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto 1.1rem;
+    display: block;
+    border: 3px solid var(--color-laranja);
+    padding: 3px;
+    background-color: #FFFFFF;
+    box-shadow: 0 6px 20px rgba(245, 130, 32, 0.25);
+    transition: transform 0.25s ease;
 }
 
-.login-title {
-    font-size: 1.35rem;
-    font-weight: 700;
-    color: var(--text-main);
-    line-height: 1.25;
+.login-logo:hover {
+    transform: scale(1.04);
+}
+
+.login-brand {
+    font-size: 1.55rem;
+    font-weight: 800;
+    color: var(--color-grafite);
+    letter-spacing: 0.05em;
+    line-height: 1.2;
+}
+
+.login-brand span {
+    color: var(--color-laranja);
 }
 
 .login-subtitle {
-    font-size: 0.875rem;
+    font-size: 0.88rem;
     color: var(--text-muted);
     margin-top: 0.35rem;
+    font-weight: 500;
 }
 
 .form-group {
-    margin-bottom: 1.25rem;
+    margin-bottom: 1.3rem;
 }
 
 .form-label {
     display: block;
-    margin-bottom: 0.35rem;
-    font-size: 0.875rem;
+    margin-bottom: 0.4rem;
+    font-size: 0.88rem;
     font-weight: 600;
-    color: var(--text-main);
+    color: var(--text-heading);
 }
 
 .form-control {
     width: 100%;
-    padding: 0.75rem 1rem;
+    padding: 0.78rem 1rem;
     font-size: 0.95rem;
     border-radius: var(--radius-sm);
     border: 1px solid var(--border-dark);
     outline: none;
     transition: all 0.2s ease;
+    font-family: inherit;
+    color: var(--text-main);
+    background-color: #FFFFFF;
 }
 
 .form-control:focus {
     border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.15);
+    box-shadow: 0 0 0 3px rgba(245, 130, 32, 0.2);
 }
 
 .btn-login {
     width: 100%;
-    padding: 0.85rem;
+    padding: 0.88rem 1.25rem;
     font-size: 1rem;
-    font-weight: 600;
-    color: #ffffff;
-    background-color: var(--primary);
+    font-weight: 700;
+    color: #FFFFFF;
+    background: linear-gradient(135deg, var(--color-laranja) 0%, var(--primary-hover) 100%);
     border: none;
     border-radius: var(--radius-sm);
     cursor: pointer;
-    transition: background-color 0.2s ease;
-    margin-top: 0.5rem;
+    transition: all 0.2s ease;
+    margin-top: 0.6rem;
+    box-shadow: 0 4px 14px rgba(245, 130, 32, 0.3);
+    font-family: inherit;
 }
 
 .btn-login:hover {
-    background-color: var(--primary-hover);
+    background: linear-gradient(135deg, var(--primary-hover) 0%, var(--color-laranja) 100%);
+    box-shadow: 0 6px 18px rgba(245, 130, 32, 0.4);
+    transform: translateY(-1px);
 }
 
+.btn-login:active {
+    transform: translateY(0);
+}
+
+/* Atalhos de Demonstração (Mostra) */
 .login-demo-accounts {
-    margin-top: 1.75rem;
-    padding-top: 1.25rem;
+    margin-top: 1.85rem;
+    padding-top: 1.35rem;
     border-top: 1px dashed var(--border);
-    font-size: 0.8rem;
+    font-size: 0.82rem;
     color: var(--text-muted);
+}
+
+.login-demo-accounts strong {
+    color: var(--text-heading);
+    display: block;
+    margin-bottom: 0.6rem;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
 }
 
 .demo-list {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 0.5rem;
-    margin-top: 0.5rem;
+    gap: 0.6rem;
 }
 
 .demo-item {
-    background-color: #f8fafc;
+    background-color: #FAF7F2;
     border: 1px solid var(--border);
     border-radius: var(--radius-sm);
-    padding: 0.35rem 0.5rem;
+    padding: 0.5rem 0.65rem;
     cursor: pointer;
     transition: all 0.2s ease;
 }
 
 .demo-item:hover {
     background-color: var(--primary-light);
-    border-color: var(--primary);
+    border-color: var(--color-laranja);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(245, 130, 32, 0.15);
 }
 
 .demo-role {
-    font-weight: 600;
-    color: var(--primary);
+    font-weight: 700;
+    color: var(--color-laranja);
     display: block;
+    font-size: 0.82rem;
 }
 
 .demo-email {
     font-size: 0.72rem;
     color: var(--text-muted);
+    font-family: monospace;
 }
 
 .login-footer {
     text-align: center;
-    margin-top: 1.5rem;
-    font-size: 0.775rem;
+    margin-top: 1.75rem;
+    font-size: 0.78rem;
     color: var(--text-muted);
 }
 
+/* Alertas */
 .alert {
-    padding: 0.75rem 1rem;
+    padding: 0.85rem 1.15rem;
     border-radius: var(--radius-sm);
-    margin-bottom: 1.25rem;
-    font-size: 0.875rem;
+    margin-bottom: 1.35rem;
+    font-size: 0.88rem;
+    line-height: 1.4;
 }
 
 .alert-danger {
-    background-color: #fee2e2;
-    color: #991b1b;
-    border: 1px solid #fca5a5;
+    background-color: #FEF2F2;
+    color: #991B1B;
+    border: 1px solid #FECACA;
 }
 
 .alert-warning {
-    background-color: #fef3c7;
-    color: #92400e;
-    border: 1px solid #fcd34d;
+    background-color: #FFFBEB;
+    color: #92400E;
+    border: 1px solid #FDE68A;
 }
 
 .alert-info {
-    background-color: #e0f2fe;
-    color: #075985;
-    border: 1px solid #7dd3fc;
+    background-color: #FFF5EB;
+    color: #9A3412;
+    border: 1px solid #FED7AA;
 }

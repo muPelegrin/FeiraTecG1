@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acesso ao Sistema | <?= APP_NAME ?></title>
-    <link rel="icon" type="image/svg+xml" href="<?= BASE_URL ?>/public/img/logo.svg">
+    <title>Acesso à Plataforma | <?= APP_NAME ?></title>
+    <link rel="icon" type="image/jpeg" href="<?= BASE_URL ?>/public/img/logo.jpg">
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/css/login.css">
 </head>
 <body>
     <div class="login-card">
         <div class="login-header">
-            <img src="<?= BASE_URL ?>/public/img/logo.svg" alt="Logo" class="login-logo">
-            <h1 class="login-title"><?= APP_NAME ?></h1>
-            <p class="login-subtitle">Gestão Integrada de Frequência & Previsão de Alimentação</p>
+            <img src="<?= BASE_URL ?>/public/img/logo.jpg" alt="Vivalcris" class="login-logo">
+            <h1 class="login-brand">VIVAL<span>CRIS</span></h1>
+            <p class="login-subtitle">Central de Frequência & Alimentação Escolar</p>
         </div>
 
         <?= flash('mensagem') ?>
@@ -33,11 +33,11 @@
                        required placeholder="••••••••">
             </div>
 
-            <button type="submit" class="btn-login">Entrar na Plataforma</button>
+            <button type="submit" class="btn-login">Entrar no Sistema</button>
         </form>
 
         <div class="login-demo-accounts">
-            <strong>Demonstração da Mostra (Clique para preencher):</strong>
+            <strong>Demonstração Rápida (Clique para Selecionar):</strong>
             <div class="demo-list">
                 <div class="demo-item" data-email="maria@escola.com">
                     <span class="demo-role">Maria (Inspetora)</span>
@@ -56,13 +56,13 @@
                     <span class="demo-email">admin@escola.com</span>
                 </div>
             </div>
-            <div style="margin-top: 0.5rem; text-align: center; font-size: 0.72rem; color: #64748b;">
+            <div style="margin-top: 0.65rem; text-align: center; font-size: 0.74rem; color: #777;">
                 Senha padrão para todos: <code>senha123</code>
             </div>
         </div>
 
         <div class="login-footer">
-            Mostra de Tecnologia 2026 • Grupo 01 • PHP 8+ MVC & MySQL
+            VIVALCRIS • Mostra de Tecnologia 2026 • Grupo 01
         </div>
     </div>
 
