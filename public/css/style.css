@@ -1,6 +1,6 @@
 /* ==========================================================================
    VIVALCRIS - Central de Frequência e Alimentação Escolar
-   Design System Oficial - Identidade Visual
+   Design System Neumorphism (Soft UI)
    Cores da Marca: Laranja (#F58220) | Laranja Claro (#FFB568) | Branco (#FFFFFF) | Grafite (#333333)
    ========================================================================== */
 
@@ -20,66 +20,80 @@
     --primary-accent: #FFB568;
     --primary-dark: #9A3412;
     --primary-glow: rgba(245, 130, 32, 0.22);
-    
+
     /* Cores de Feedback & Semânticas */
     --success: #15803D;
     --success-light: #F0FDF4;
     --success-border: #BBF7D0;
     --success-dark: #166534;
-    
+
     --warning: #D97706;
     --warning-light: #FFFBEB;
     --warning-border: #FDE68A;
     --warning-dark: #B45309;
-    
+
     --danger: #DC2626;
     --danger-light: #FEF2F2;
     --danger-border: #FECACA;
     --danger-dark: #991B1B;
-    
+
     --info: #0284C7;
     --info-light: #F0F9FF;
     --info-border: #BAE6FD;
-    
-    /* Superfícies & Tons Quentes (Suavizando a interface 'de IA') */
-    --bg-app: #FAF7F2;          /* Fundo quente e acolhedor */
-    --surface: #FFFFFF;         /* Branco puro */
-    --surface-hover: #F8F5EE;   /* Hover suave */
-    --surface-muted: #F3ECE1;   /* Superfície secundária */
-    --border: #E8E2D8;          /* Borda suave e natural */
-    --border-dark: #D4CCC0;
-    --border-focus: #F58220;
-    
+
+    /* ===== NEUMORPHISM — Superfície Base & Sombras ===== */
+    --neu-bg: #E4E0D9;
+    --neu-bg-light: #EAE6DF;
+    --neu-shadow-light: #F2EEEA;
+    --neu-shadow-dark: #C5C0B8;
+
+    /* Sombras neumórficas reutilizáveis */
+    --neu-raised: 6px 6px 12px var(--neu-shadow-dark), -6px -6px 12px var(--neu-shadow-light);
+    --neu-raised-sm: 3px 3px 6px var(--neu-shadow-dark), -3px -3px 6px var(--neu-shadow-light);
+    --neu-raised-lg: 8px 8px 16px var(--neu-shadow-dark), -8px -8px 16px var(--neu-shadow-light);
+    --neu-inset: inset 3px 3px 6px var(--neu-shadow-dark), inset -3px -3px 6px var(--neu-shadow-light);
+    --neu-inset-lg: inset 6px 6px 12px var(--neu-shadow-dark), inset -6px -6px 12px var(--neu-shadow-light);
+    --neu-flat: none;
+
+    /* Superfícies (herdadas para compatibilidade) */
+    --bg-app: var(--neu-bg);
+    --surface: var(--neu-bg);
+    --surface-hover: #DDD9D2;
+    --surface-muted: #D8D4CD;
+    --border: transparent;
+    --border-dark: transparent;
+    --border-focus: var(--primary);
+
     /* Tipografia (Grafite elegante) */
-    --text-main: #333333;       /* Grafite da marca */
-    --text-heading: #1F1F1F;    /* Grafite profundo */
-    --text-muted: #666666;      /* Grafite médio */
-    --text-light: #8C8C8C;      /* Grafite claro */
+    --text-main: #333333;
+    --text-heading: #1F1F1F;
+    --text-muted: #666666;
+    --text-light: #8C8C8C;
     --text-on-primary: #FFFFFF;
-    
-    /* Barra Lateral (Sidebar) em Grafite Sofisticado */
-    --sidebar-bg: #2B2B2B;      /* Grafite escuro refinado */
-    --sidebar-header-bg: #222222;
-    --sidebar-hover: #383838;
-    --sidebar-active: #F58220;  /* Laranja Vivalcris */
-    --sidebar-active-bg: rgba(245, 130, 32, 0.16);
-    --sidebar-text: #CCCCCC;
-    --sidebar-text-active: #FFFFFF;
-    --sidebar-border: rgba(255, 255, 255, 0.08);
-    
-    /* Sombras & Arredondamentos Humanizados */
-    --radius-sm: 8px;
-    --radius-md: 12px;
-    --radius-lg: 18px;
+
+    /* Sidebar Neumórfica Clara */
+    --sidebar-bg: var(--neu-bg);
+    --sidebar-header-bg: var(--neu-bg);
+    --sidebar-hover: var(--surface-hover);
+    --sidebar-active: var(--primary);
+    --sidebar-active-bg: rgba(245, 130, 32, 0.12);
+    --sidebar-text: #555555;
+    --sidebar-text-active: var(--color-grafite);
+    --sidebar-border: transparent;
+
+    /* Arredondamentos */
+    --radius-sm: 12px;
+    --radius-md: 16px;
+    --radius-lg: 22px;
     --radius-pill: 9999px;
-    --shadow-sm: 0 1px 3px rgba(51, 51, 51, 0.06);
-    --shadow-md: 0 4px 12px rgba(51, 51, 51, 0.07), 0 2px 4px rgba(51, 51, 51, 0.04);
-    --shadow-lg: 0 12px 28px rgba(51, 51, 51, 0.09), 0 4px 10px rgba(51, 51, 51, 0.05);
-    --shadow-primary: 0 4px 14px rgba(245, 130, 32, 0.28);
-    --transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+
+    /* Transição global */
+    --transition: all 0.3s ease;
 }
 
-/* Reset Geral */
+/* ==========================================================================
+   Reset Geral
+   ========================================================================== */
 *, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
@@ -95,13 +109,49 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
-/* Layout Estrutural */
+/* ==========================================================================
+   Animações & Keyframes
+   ========================================================================== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes neuPulse {
+    0%, 100% {
+        box-shadow: var(--neu-raised);
+    }
+    50% {
+        box-shadow: 4px 4px 8px var(--neu-shadow-dark), -4px -4px 8px var(--neu-shadow-light);
+    }
+}
+
+/* Respeitar preferência de movimento reduzido */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ==========================================================================
+   Layout Estrutural
+   ========================================================================== */
 .app-layout {
     display: flex;
     min-height: 100vh;
 }
 
-/* Sidebar VIVALCRIS */
+/* ==========================================================================
+   SIDEBAR — Neumórfica Clara
+   ========================================================================== */
 .app-sidebar {
     width: 270px;
     background-color: var(--sidebar-bg);
@@ -114,35 +164,40 @@ body {
     left: 0;
     z-index: 100;
     transition: var(--transition);
-    border-right: 1px solid rgba(0, 0, 0, 0.15);
-    box-shadow: 4px 0 16px rgba(0, 0, 0, 0.08);
+    border-right: none;
+    box-shadow: 4px 0 12px var(--neu-shadow-dark);
 }
 
+/* Cabeçalho da sidebar */
 .sidebar-header {
     padding: 1.35rem 1.4rem;
     background-color: var(--sidebar-header-bg);
-    border-bottom: 1px solid var(--sidebar-border);
+    border-bottom: none;
     display: flex;
     align-items: center;
     gap: 0.85rem;
+    box-shadow: var(--neu-inset);
+    margin: 0.6rem;
+    border-radius: var(--radius-md);
 }
 
+/* Logo circular neumórfica */
 .sidebar-logo {
     width: 44px;
     height: 44px;
     border-radius: 50%;
     object-fit: cover;
-    background-color: #FFFFFF;
+    background-color: var(--neu-bg);
     padding: 2px;
     border: 2px solid var(--primary);
-    box-shadow: 0 2px 8px rgba(245, 130, 32, 0.3);
+    box-shadow: 3px 3px 6px var(--neu-shadow-dark), -3px -3px 6px var(--neu-shadow-light);
     flex-shrink: 0;
 }
 
 .sidebar-title {
     font-size: 1.12rem;
     font-weight: 800;
-    color: #FFFFFF;
+    color: var(--color-grafite);
     letter-spacing: 0.06em;
     line-height: 1.2;
 }
@@ -153,11 +208,12 @@ body {
 
 .sidebar-subtitle {
     font-size: 0.74rem;
-    color: var(--color-laranja-claro);
+    color: var(--primary);
     font-weight: 500;
     letter-spacing: 0.02em;
 }
 
+/* Navegação da sidebar */
 .sidebar-nav {
     flex: 1;
     padding: 1.2rem 0;
@@ -169,10 +225,11 @@ body {
     font-size: 0.68rem;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: #8C8C8C;
+    color: var(--text-light);
     font-weight: 700;
 }
 
+/* Links da sidebar */
 .sidebar-link {
     display: flex;
     align-items: center;
@@ -187,22 +244,27 @@ body {
     transition: var(--transition);
 }
 
+/* Hover: leve elevação neumórfica */
 .sidebar-link:hover {
     background-color: var(--sidebar-hover);
-    color: #FFFFFF;
-    transform: translateX(3px);
+    color: var(--color-grafite);
+    box-shadow: var(--neu-raised-sm);
+    transform: translateX(2px);
 }
 
+/* Item ativo: inset neumórfico com destaque laranja */
 .sidebar-link.active {
     background-color: var(--sidebar-active-bg);
-    color: #FFFFFF;
+    color: var(--sidebar-text-active);
     font-weight: 600;
+    box-shadow: var(--neu-inset);
 }
 
 .sidebar-link.active .sidebar-icon {
     color: var(--primary);
 }
 
+/* Ícones da sidebar */
 .sidebar-link .sidebar-icon {
     width: 20px;
     height: 20px;
@@ -218,7 +280,9 @@ body {
     color: var(--primary);
 }
 
-/* Área Principal */
+/* ==========================================================================
+   Área Principal
+   ========================================================================== */
 .app-main {
     margin-left: 270px;
     flex: 1;
@@ -228,11 +292,13 @@ body {
     background-color: var(--bg-app);
 }
 
-/* Topbar */
+/* ==========================================================================
+   TOPBAR — Superfície Neumórfica Elevada
+   ========================================================================== */
 .app-topbar {
     height: 68px;
-    background-color: var(--surface);
-    border-bottom: 1px solid var(--border);
+    background-color: var(--neu-bg);
+    border-bottom: none;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -240,7 +306,7 @@ body {
     position: sticky;
     top: 0;
     z-index: 90;
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--neu-raised-sm);
 }
 
 .topbar-left {
@@ -249,15 +315,23 @@ body {
     gap: 1.1rem;
 }
 
+/* Botão toggle sidebar — neumórfico raised */
 .btn-sidebar-toggle {
     display: none;
-    background: none;
+    background: var(--neu-bg);
     border: none;
     font-size: 1.4rem;
     cursor: pointer;
     color: var(--text-main);
-    padding: 0.3rem;
+    padding: 0.5rem;
     line-height: 1;
+    border-radius: var(--radius-sm);
+    box-shadow: var(--neu-raised-sm);
+    transition: var(--transition);
+}
+
+.btn-sidebar-toggle:active {
+    box-shadow: var(--neu-inset);
 }
 
 .topbar-brand-tag {
@@ -279,15 +353,22 @@ body {
     gap: 1.35rem;
 }
 
+/* User badge — pill neumórfico */
 .user-badge {
     display: flex;
     align-items: center;
     gap: 0.65rem;
     font-size: 0.9rem;
-    background-color: var(--surface-hover);
-    padding: 0.35rem 0.85rem;
+    background-color: var(--neu-bg);
+    padding: 0.4rem 1rem;
     border-radius: var(--radius-pill);
-    border: 1px solid var(--border);
+    border: none;
+    box-shadow: var(--neu-raised-sm);
+    transition: var(--transition);
+}
+
+.user-badge:hover {
+    box-shadow: var(--neu-raised);
 }
 
 .user-badge strong {
@@ -297,23 +378,28 @@ body {
 
 .user-badge .role-tag {
     font-size: 0.72rem;
-    padding: 0.15rem 0.55rem;
+    padding: 0.18rem 0.6rem;
     border-radius: var(--radius-pill);
-    background-color: var(--primary-light);
-    color: var(--primary-dark);
-    border: 1px solid var(--primary-light-border);
+    background-color: var(--primary);
+    color: var(--text-on-primary);
+    border: none;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.04em;
+    box-shadow: var(--neu-raised-sm);
 }
 
-/* Conteúdo Principal */
+/* ==========================================================================
+   Conteúdo Principal
+   ========================================================================== */
 .content-area {
     padding: 2.2rem 2.5rem;
     flex: 1;
 }
 
-/* Cabeçalho da Página */
+/* ==========================================================================
+   Cabeçalho da Página
+   ========================================================================== */
 .page-header {
     display: flex;
     align-items: center;
@@ -333,17 +419,18 @@ body {
     letter-spacing: -0.02em;
 }
 
+/* Ícone do cabeçalho com inset neumórfico */
 .page-header-title .header-icon {
-    width: 34px;
-    height: 34px;
-    background: linear-gradient(135deg, var(--primary-light) 0%, var(--surface) 100%);
-    border: 1px solid var(--primary-light-border);
+    width: 38px;
+    height: 38px;
+    background: var(--neu-bg);
+    border: none;
     border-radius: var(--radius-sm);
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--primary);
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--neu-inset);
 }
 
 .breadcrumb-info {
@@ -358,28 +445,33 @@ body {
     gap: 0.75rem;
 }
 
-/* Cards & Superfícies */
+/* ==========================================================================
+   CARDS — Superfícies Neumórficas
+   ========================================================================== */
 .card {
-    background-color: var(--surface);
+    background-color: var(--neu-bg);
     border-radius: var(--radius-md);
-    border: 1px solid var(--border);
-    box-shadow: var(--shadow-sm);
+    border: none;
+    box-shadow: var(--neu-raised);
     margin-bottom: 1.75rem;
     overflow: hidden;
     transition: var(--transition);
+    animation: fadeInUp 0.5s ease both;
 }
 
 .card:hover {
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--neu-raised-lg);
 }
 
+/* Cabeçalho do card — sem background diferente, separação por sombra interna */
 .card-header {
     padding: 1.15rem 1.4rem;
-    border-bottom: 1px solid var(--border);
-    background-color: #FCFAF7;
+    border-bottom: none;
+    background-color: transparent;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    box-shadow: inset 0 -2px 4px var(--neu-shadow-dark), inset 0 2px 4px var(--neu-shadow-light);
 }
 
 .card-header h3 {
@@ -395,13 +487,17 @@ body {
     padding: 1.4rem;
 }
 
+/* Rodapé do card — separação por sombra interna sutil */
 .card-footer {
     padding: 1.1rem 1.4rem;
-    background-color: #FCFAF7;
-    border-top: 1px solid var(--border);
+    background-color: transparent;
+    border-top: none;
+    box-shadow: inset 0 2px 4px var(--neu-shadow-dark), inset 0 -2px 4px var(--neu-shadow-light);
 }
 
-/* Stats Grid & Indicadores de Alto Impacto */
+/* ==========================================================================
+   STAT CARDS — Indicadores Neumórficos
+   ========================================================================== */
 .stats-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
@@ -410,48 +506,47 @@ body {
 }
 
 .stat-card {
-    background-color: var(--surface);
-    border: 1px solid var(--border);
+    background-color: var(--neu-bg);
+    border: none;
     border-radius: var(--radius-md);
     padding: 1.35rem 1.4rem;
     display: flex;
     align-items: center;
     gap: 1.1rem;
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--neu-raised);
     transition: var(--transition);
     position: relative;
     overflow: hidden;
+    animation: fadeInUp 0.5s ease both;
 }
 
+/* Remover o ::before lateral colorido */
 .stat-card::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 4px;
-    height: 100%;
-    background-color: transparent;
-    transition: var(--transition);
+    display: none;
 }
 
+/* Hover: leve elevação extra */
 .stat-card:hover {
     transform: translateY(-3px);
-    box-shadow: var(--shadow-md);
-    border-color: var(--primary-accent);
+    box-shadow: var(--neu-raised-lg);
+    border-color: transparent;
 }
 
 .stat-card:hover::before {
-    background-color: var(--primary);
+    display: none;
 }
 
+/* Ícone de stat — inset neumórfico circular */
 .stat-icon {
     width: 52px;
     height: 52px;
-    border-radius: var(--radius-md);
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    box-shadow: var(--neu-inset);
+    background-color: var(--neu-bg);
 }
 
 .stat-icon svg {
@@ -459,34 +554,40 @@ body {
     height: 26px;
 }
 
+/* Variantes de cor para stat-icon — mantém cor do ícone, fundo neumórfico */
 .stat-icon.primary {
-    background: linear-gradient(135deg, #FFF5EB 0%, #FFEDD5 100%);
+    background: var(--neu-bg);
     color: var(--primary);
-    border: 1px solid var(--primary-light-border);
+    border: none;
+    box-shadow: var(--neu-inset);
 }
 
 .stat-icon.success {
-    background: linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%);
+    background: var(--neu-bg);
     color: var(--success);
-    border: 1px solid var(--success-border);
+    border: none;
+    box-shadow: var(--neu-inset);
 }
 
 .stat-icon.warning {
-    background: linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%);
+    background: var(--neu-bg);
     color: var(--warning);
-    border: 1px solid var(--warning-border);
+    border: none;
+    box-shadow: var(--neu-inset);
 }
 
 .stat-icon.danger {
-    background: linear-gradient(135deg, #FEF2F2 0%, #FEE2E2 100%);
+    background: var(--neu-bg);
     color: var(--danger);
-    border: 1px solid var(--danger-border);
+    border: none;
+    box-shadow: var(--neu-inset);
 }
 
 .stat-icon.info {
-    background: linear-gradient(135deg, #F0F9FF 0%, #E0F2FE 100%);
+    background: var(--neu-bg);
     color: var(--info);
-    border: 1px solid var(--info-border);
+    border: none;
+    box-shadow: var(--neu-inset);
 }
 
 .stat-data .stat-number {
@@ -504,7 +605,9 @@ body {
     margin-top: 0.2rem;
 }
 
-/* Botões VIVALCRIS */
+/* ==========================================================================
+   BOTÕES — Neumórficos
+   ========================================================================== */
 .btn {
     display: inline-flex;
     align-items: center;
@@ -514,75 +617,110 @@ body {
     font-size: 0.9rem;
     font-weight: 600;
     border-radius: var(--radius-sm);
-    border: 1px solid transparent;
+    border: none;
     cursor: pointer;
     text-decoration: none;
     transition: var(--transition);
     line-height: 1.3;
     font-family: inherit;
+    background-color: var(--neu-bg);
+    color: var(--text-main);
+    box-shadow: var(--neu-raised-sm);
 }
 
+/* Botão primário — raised neumórfico com cor laranja */
 .btn-primary {
     background-color: var(--primary);
     color: #FFFFFF;
-    box-shadow: 0 2px 6px rgba(245, 130, 32, 0.25);
+    box-shadow: var(--neu-raised-sm);
 }
 
 .btn-primary:hover {
     background-color: var(--primary-hover);
-    box-shadow: var(--shadow-primary);
+    box-shadow: var(--neu-raised);
     transform: translateY(-1px);
 }
 
+/* Estado ativo/pressionado — inset neumórfico */
 .btn-primary:active {
     background-color: var(--primary-active);
     transform: translateY(0);
+    box-shadow: var(--neu-inset);
 }
 
+/* Botão de sucesso */
 .btn-success {
     background-color: var(--success);
     color: #FFFFFF;
+    box-shadow: var(--neu-raised-sm);
 }
 
 .btn-success:hover {
     background-color: #166534;
     transform: translateY(-1px);
+    box-shadow: var(--neu-raised);
 }
 
+.btn-success:active {
+    box-shadow: var(--neu-inset);
+    transform: translateY(0);
+}
+
+/* Botão de aviso */
 .btn-warning {
     background-color: var(--warning);
     color: #FFFFFF;
+    box-shadow: var(--neu-raised-sm);
 }
 
 .btn-warning:hover {
     background-color: var(--warning-dark);
+    box-shadow: var(--neu-raised);
 }
 
+.btn-warning:active {
+    box-shadow: var(--neu-inset);
+}
+
+/* Botão de perigo */
 .btn-danger {
     background-color: var(--danger);
     color: #FFFFFF;
+    box-shadow: var(--neu-raised-sm);
 }
 
 .btn-danger:hover {
     background-color: var(--danger-dark);
+    box-shadow: var(--neu-raised);
 }
 
+.btn-danger:active {
+    box-shadow: var(--neu-inset);
+}
+
+/* Botão outline — raised neumórfico neutro */
 .btn-outline {
-    background-color: var(--surface);
-    border-color: var(--border-dark);
+    background-color: var(--neu-bg);
+    border: none;
     color: var(--text-main);
+    box-shadow: var(--neu-raised-sm);
 }
 
 .btn-outline:hover {
     background-color: var(--surface-hover);
-    border-color: var(--primary-accent);
     color: var(--primary);
+    box-shadow: var(--neu-raised);
 }
 
+.btn-outline:active {
+    box-shadow: var(--neu-inset);
+}
+
+/* Tamanhos de botão */
 .btn-sm {
     padding: 0.38rem 0.75rem;
     font-size: 0.8rem;
-    border-radius: 6px;
+    border-radius: 8px;
 }
 
 .btn-lg {
@@ -591,7 +729,9 @@ body {
     border-radius: var(--radius-md);
 }
 
-/* Tabelas Humanizadas */
+/* ==========================================================================
+   TABELAS — Neumórficas
+   ========================================================================== */
 .table-container {
     width: 100%;
     overflow-x: auto;
@@ -605,37 +745,43 @@ table {
     font-size: 0.92rem;
 }
 
+/* Cabeçalho da tabela — texto em caps, sem background forte */
 table th {
-    background-color: #FAF7F2;
+    background-color: transparent;
     color: var(--text-muted);
     font-weight: 700;
     font-size: 0.76rem;
     text-transform: uppercase;
     letter-spacing: 0.06em;
     padding: 0.95rem 1.15rem;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--neu-shadow-dark);
 }
 
 table td {
     padding: 0.95rem 1.15rem;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid rgba(197, 192, 184, 0.3);
     color: var(--text-main);
     vertical-align: middle;
 }
 
 table tbody tr {
-    transition: background-color 0.15s ease;
+    transition: var(--transition);
+    border-radius: var(--radius-sm);
 }
 
+/* Hover row: leve elevação */
 table tbody tr:hover {
-    background-color: #FCFAF6;
+    background-color: var(--surface-hover);
+    box-shadow: var(--neu-raised-sm);
 }
 
 table tbody tr:last-child td {
     border-bottom: none;
 }
 
-/* Formulários */
+/* ==========================================================================
+   FORMULÁRIOS — Inputs Neumórficos
+   ========================================================================== */
 .form-group {
     margin-bottom: 1.35rem;
 }
@@ -653,22 +799,25 @@ table tbody tr:last-child td {
     color: var(--danger);
 }
 
+/* Input — inset shadow, sem border forte */
 .form-control {
     width: 100%;
     padding: 0.65rem 0.95rem;
     font-size: 0.92rem;
     border-radius: var(--radius-sm);
-    border: 1px solid var(--border-dark);
-    background-color: var(--surface);
+    border: none;
+    background-color: var(--neu-bg);
     color: var(--text-main);
     transition: var(--transition);
     outline: none;
     font-family: inherit;
+    box-shadow: var(--neu-inset);
 }
 
+/* Focus: glow laranja sutil */
 .form-control:focus {
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px var(--primary-glow);
+    border: none;
+    box-shadow: var(--neu-inset), 0 0 0 3px var(--primary-glow);
 }
 
 .form-row {
@@ -684,7 +833,9 @@ table tbody tr:last-child td {
     line-height: 1.4;
 }
 
-/* Alertas & Badges */
+/* ==========================================================================
+   ALERTAS — Neumórficos Elevados
+   ========================================================================== */
 .alert {
     padding: 1rem 1.35rem;
     border-radius: var(--radius-sm);
@@ -693,35 +844,32 @@ table tbody tr:last-child td {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border: 1px solid transparent;
+    border: none;
+    box-shadow: var(--neu-raised);
 }
 
 .alert-success {
-    background-color: var(--success-light);
+    background-color: #EAF5EC;
     color: var(--success-dark);
-    border-color: var(--success-border);
 }
 
 .alert-warning {
-    background-color: var(--warning-light);
+    background-color: #F5EFDF;
     color: var(--warning-dark);
-    border-color: var(--warning-border);
 }
 
 .alert-danger {
-    background-color: var(--danger-light);
+    background-color: #F5E5E5;
     color: var(--danger-dark);
-    border-color: var(--danger-border);
 }
 
 .alert-info {
-    background-color: var(--info-light);
+    background-color: #E5EEF5;
     color: #0369A1;
-    border-color: var(--info-border);
 }
 
 .alert-close {
-    background: none;
+    background: var(--neu-bg);
     border: none;
     font-size: 1.3rem;
     line-height: 1;
@@ -729,55 +877,65 @@ table tbody tr:last-child td {
     color: inherit;
     opacity: 0.7;
     transition: opacity 0.2s;
+    border-radius: 50%;
+    padding: 0.2rem 0.4rem;
+    box-shadow: var(--neu-raised-sm);
 }
 
 .alert-close:hover {
     opacity: 1;
+    box-shadow: var(--neu-inset);
 }
 
-/* Badges */
+/* ==========================================================================
+   BADGES — Pill Neumórficos
+   ========================================================================== */
 .badge {
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
-    padding: 0.25rem 0.65rem;
+    padding: 0.28rem 0.7rem;
     border-radius: var(--radius-pill);
     font-size: 0.74rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.04em;
     line-height: 1.2;
+    box-shadow: var(--neu-raised-sm);
+    border: none;
 }
 
-.badge-success { background-color: var(--success-light); color: var(--success-dark); border: 1px solid var(--success-border); }
-.badge-warning { background-color: var(--warning-light); color: var(--warning-dark); border: 1px solid var(--warning-border); }
-.badge-danger  { background-color: var(--danger-light);  color: var(--danger-dark);  border: 1px solid var(--danger-border); }
-.badge-info    { background-color: var(--primary-light); color: var(--primary-dark); border: 1px solid var(--primary-light-border); }
-.badge-secondary { background-color: #F0ECE4; color: var(--text-muted); border: 1px solid var(--border); }
+.badge-success { background-color: #E0F0E4; color: var(--success-dark); }
+.badge-warning { background-color: #F0E9D8; color: var(--warning-dark); }
+.badge-danger  { background-color: #F0DFDF; color: var(--danger-dark); }
+.badge-info    { background-color: #EDE5D8; color: var(--primary-dark); }
+.badge-secondary { background-color: var(--surface-hover); color: var(--text-muted); }
 
-/* Banner de Turmas Pendentes (Atenção Operacional) */
+/* ==========================================================================
+   Banner de Turmas Pendentes — Elevação Neumórfica com Destaque Laranja
+   ========================================================================== */
 .alert-pending-banner {
-    background: linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 100%);
-    border: 1.5px solid var(--primary);
+    background: var(--neu-bg-light);
+    border: 2px solid var(--primary);
     border-radius: var(--radius-md);
     padding: 1.35rem 1.6rem;
     margin-bottom: 1.75rem;
     display: flex;
     align-items: center;
     gap: 1.25rem;
-    box-shadow: 0 4px 14px rgba(245, 130, 32, 0.12);
+    box-shadow: var(--neu-raised), 0 0 0 2px rgba(245, 130, 32, 0.15);
 }
 
 .alert-pending-banner .banner-icon {
     width: 48px;
     height: 48px;
-    background-color: #FFFFFF;
+    background-color: var(--neu-bg);
     border-radius: var(--radius-md);
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--primary);
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--neu-inset);
     flex-shrink: 0;
 }
 
@@ -794,20 +952,23 @@ table tbody tr:last-child td {
     line-height: 1.45;
 }
 
-/* Radio buttons estilizáveis para Chamada Rápida */
+/* ==========================================================================
+   Radio Buttons — Chamada Rápida (Neumórfico)
+   ========================================================================== */
 .radio-attendance-group {
     display: inline-flex;
-    background-color: #EFE9E0;
-    padding: 3px;
+    background-color: var(--neu-bg);
+    padding: 4px;
     border-radius: var(--radius-sm);
-    gap: 3px;
+    gap: 4px;
+    box-shadow: var(--neu-inset);
 }
 
 .radio-attendance-label {
     padding: 0.4rem 0.85rem;
     font-size: 0.82rem;
     font-weight: 600;
-    border-radius: 6px;
+    border-radius: 8px;
     cursor: pointer;
     transition: var(--transition);
     user-select: none;
@@ -821,48 +982,55 @@ table tbody tr:last-child td {
     display: none;
 }
 
+/* Labels selecionadas — raised neumórfico */
 .radio-attendance-group input[type="radio"]:checked + .radio-presente {
     background-color: var(--success);
     color: #FFFFFF;
-    box-shadow: 0 1px 4px rgba(21, 128, 61, 0.25);
+    box-shadow: var(--neu-raised-sm);
 }
 
 .radio-attendance-group input[type="radio"]:checked + .radio-ausente {
     background-color: var(--danger);
     color: #FFFFFF;
-    box-shadow: 0 1px 4px rgba(220, 38, 38, 0.25);
+    box-shadow: var(--neu-raised-sm);
 }
 
 .radio-attendance-group input[type="radio"]:checked + .radio-justificado {
     background-color: var(--warning);
     color: #FFFFFF;
-    box-shadow: 0 1px 4px rgba(217, 119, 6, 0.25);
+    box-shadow: var(--neu-raised-sm);
 }
 
-/* Grid de Colunas */
+/* ==========================================================================
+   Grid de Colunas
+   ========================================================================== */
 .grid-2 {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
     gap: 1.65rem;
 }
 
-/* Empty State Aconchegante */
+/* ==========================================================================
+   Empty State — Neumórfico
+   ========================================================================== */
 .empty-state {
     text-align: center;
     padding: 3.5rem 1.5rem;
     color: var(--text-muted);
 }
 
+/* Ícone com inset circular neumórfico */
 .empty-state-icon {
-    width: 60px;
-    height: 60px;
+    width: 68px;
+    height: 68px;
     margin: 0 auto 1rem;
-    background-color: var(--surface-muted);
+    background-color: var(--neu-bg);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--primary);
+    box-shadow: var(--neu-inset-lg);
 }
 
 .empty-state-title {
@@ -872,10 +1040,14 @@ table tbody tr:last-child td {
     margin-bottom: 0.35rem;
 }
 
-/* Responsividade Mobile & Tablet */
+/* ==========================================================================
+   Responsividade — Mobile & Tablet (breakpoint 992px)
+   ========================================================================== */
 @media (max-width: 992px) {
     .app-sidebar {
         transform: translateX(-100%);
+        /* Sidebar mobile com sombra neumórfica */
+        box-shadow: 8px 0 20px var(--neu-shadow-dark);
     }
 
     .app-sidebar.show {
@@ -886,8 +1058,11 @@ table tbody tr:last-child td {
         margin-left: 0;
     }
 
+    /* Botão toggle — neumórfico raised */
     .btn-sidebar-toggle {
-        display: block;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .content-area {
@@ -899,7 +1074,9 @@ table tbody tr:last-child td {
     }
 }
 
-/* Impressão Limpa */
+/* ==========================================================================
+   Impressão Limpa — Preservar regras existentes
+   ========================================================================== */
 @media print {
     .app-sidebar,
     .app-topbar,

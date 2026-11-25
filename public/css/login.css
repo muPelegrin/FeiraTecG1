@@ -1,15 +1,20 @@
 /* ==========================================================================
    VIVALCRIS - Central de Frequência e Alimentação Escolar
-   Tela de Login com Identidade Visual Oficial
+   Tela de Login — Estilo Neumorphism (Soft UI)
    Cores: Laranja (#F58220) | Laranja Claro (#FFB568) | Branco (#FFFFFF) | Grafite (#333333)
    ========================================================================== */
 
+/* --------------------------------------------------------------------------
+   Variáveis de Design
+   -------------------------------------------------------------------------- */
 :root {
+    /* Paleta VIVALCRIS */
     --color-laranja: #F58220;
     --color-laranja-claro: #FFB568;
     --color-branco: #FFFFFF;
     --color-grafite: #333333;
 
+    /* Aliases semânticos */
     --primary: #F58220;
     --primary-hover: #E06D0C;
     --primary-light: #FFF5EB;
@@ -18,26 +23,54 @@
     --text-muted: #666666;
     --border: #E8E2D8;
     --border-dark: #D4CCC0;
-    --radius-lg: 16px;
-    --radius-md: 10px;
-    --radius-sm: 6px;
+
+    /* Raios neumórficos */
+    --radius-lg: 24px;
+    --radius-md: 16px;
+    --radius-sm: 12px;
     --radius-pill: 9999px;
-    --shadow-card: 0 16px 40px -8px rgba(51, 51, 51, 0.18), 0 4px 12px rgba(51, 51, 51, 0.08);
+
+    /* Superfície neumórfica — tom neutro quente */
+    --neu-bg: #E4E0D9;
+    --neu-light: #F2EEEA;
+    --neu-dark: #C8C2B9;
+
+    /* Sombras neumórficas reutilizáveis */
+    --shadow-raised:
+        8px 8px 16px var(--neu-dark),
+        -8px -8px 16px var(--neu-light);
+    --shadow-raised-strong:
+        10px 10px 24px var(--neu-dark),
+        -10px -10px 24px var(--neu-light);
+    --shadow-inset:
+        inset 4px 4px 8px var(--neu-dark),
+        inset -4px -4px 8px var(--neu-light);
+    --shadow-raised-sm:
+        4px 4px 10px var(--neu-dark),
+        -4px -4px 10px var(--neu-light);
+    --shadow-card:
+        12px 12px 30px var(--neu-dark),
+        -12px -12px 30px var(--neu-light);
 }
 
+/* --------------------------------------------------------------------------
+   Reset básico
+   -------------------------------------------------------------------------- */
 *, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
+/* --------------------------------------------------------------------------
+   Body / Fundo — superfície neumórfica clara com toque laranja sutil
+   -------------------------------------------------------------------------- */
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    background-color: var(--color-grafite);
-    background-image: 
-        radial-gradient(circle at 15% 20%, rgba(245, 130, 32, 0.28) 0%, transparent 45%),
-        radial-gradient(circle at 85% 80%, rgba(255, 181, 104, 0.2) 0%, transparent 50%),
-        linear-gradient(135deg, #262626 0%, #333333 100%);
+    background-color: var(--neu-bg);
+    background-image:
+        radial-gradient(circle at 30% 25%, rgba(245, 130, 32, 0.07) 0%, transparent 55%),
+        radial-gradient(circle at 70% 75%, rgba(255, 181, 104, 0.05) 0%, transparent 50%);
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -47,34 +80,37 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
+/* --------------------------------------------------------------------------
+   Login Card — elemento principal com sombra neumórfica forte
+   -------------------------------------------------------------------------- */
 .login-card {
-    background-color: var(--color-branco);
+    background-color: var(--neu-bg);
     width: 100%;
     max-width: 460px;
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-card);
-    padding: 2.8rem 2.4rem;
+    padding: 3rem 2.5rem;
     position: relative;
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    border: none;
+    animation: fadeInUp 0.5s ease-out both;
 }
 
+/* Sem barra colorida no topo — neumorphism puro */
 .login-card::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 5px;
-    background: linear-gradient(90deg, var(--color-laranja) 0%, var(--color-laranja-claro) 100%);
-    border-top-left-radius: var(--radius-lg);
-    border-top-right-radius: var(--radius-lg);
+    content: none;
 }
 
+/* --------------------------------------------------------------------------
+   Cabeçalho do Login
+   -------------------------------------------------------------------------- */
 .login-header {
     text-align: center;
     margin-bottom: 2rem;
 }
 
+/* --------------------------------------------------------------------------
+   Logo — container circular com inset neumórfico
+   -------------------------------------------------------------------------- */
 .login-logo {
     width: 96px;
     height: 96px;
@@ -84,15 +120,20 @@ body {
     display: block;
     border: 3px solid var(--color-laranja);
     padding: 3px;
-    background-color: #FFFFFF;
-    box-shadow: 0 6px 20px rgba(245, 130, 32, 0.25);
-    transition: transform 0.25s ease;
+    background-color: var(--neu-bg);
+    box-shadow:
+        inset 4px 4px 8px var(--neu-dark),
+        inset -4px -4px 8px var(--neu-light);
+    transition: transform 0.3s ease;
 }
 
 .login-logo:hover {
-    transform: scale(1.04);
+    transform: scale(1.06);
 }
 
+/* --------------------------------------------------------------------------
+   Título da Marca — VIVAL em grafite, CRIS em laranja
+   -------------------------------------------------------------------------- */
 .login-brand {
     font-size: 1.55rem;
     font-weight: 800;
@@ -105,6 +146,9 @@ body {
     color: var(--color-laranja);
 }
 
+/* --------------------------------------------------------------------------
+   Subtítulo
+   -------------------------------------------------------------------------- */
 .login-subtitle {
     font-size: 0.88rem;
     color: var(--text-muted);
@@ -112,10 +156,16 @@ body {
     font-weight: 500;
 }
 
+/* --------------------------------------------------------------------------
+   Grupo de Formulário
+   -------------------------------------------------------------------------- */
 .form-group {
     margin-bottom: 1.3rem;
 }
 
+/* --------------------------------------------------------------------------
+   Labels
+   -------------------------------------------------------------------------- */
 .form-label {
     display: block;
     margin-bottom: 0.4rem;
@@ -124,55 +174,77 @@ body {
     color: var(--text-heading);
 }
 
+/* --------------------------------------------------------------------------
+   Inputs — inset neumórfico (pressionado na superfície)
+   -------------------------------------------------------------------------- */
 .form-control {
     width: 100%;
     padding: 0.78rem 1rem;
     font-size: 0.95rem;
     border-radius: var(--radius-sm);
-    border: 1px solid var(--border-dark);
+    border: none;
     outline: none;
-    transition: all 0.2s ease;
+    transition: box-shadow 0.25s ease, background-color 0.25s ease;
     font-family: inherit;
     color: var(--text-main);
-    background-color: #FFFFFF;
+    background-color: var(--neu-bg);
+    box-shadow: var(--shadow-inset);
+}
+
+.form-control::placeholder {
+    color: #A09A92;
 }
 
 .form-control:focus {
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(245, 130, 32, 0.2);
+    border-color: transparent;
+    box-shadow:
+        inset 4px 4px 8px var(--neu-dark),
+        inset -4px -4px 8px var(--neu-light),
+        0 0 0 3px rgba(245, 130, 32, 0.2);
 }
 
+/* --------------------------------------------------------------------------
+   Botão Login — raised neumórfico com fundo laranja
+   -------------------------------------------------------------------------- */
 .btn-login {
     width: 100%;
     padding: 0.88rem 1.25rem;
     font-size: 1rem;
     font-weight: 700;
-    color: #FFFFFF;
+    color: var(--color-branco);
     background: linear-gradient(135deg, var(--color-laranja) 0%, var(--primary-hover) 100%);
     border: none;
     border-radius: var(--radius-sm);
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: box-shadow 0.25s ease, transform 0.15s ease;
     margin-top: 0.6rem;
-    box-shadow: 0 4px 14px rgba(245, 130, 32, 0.3);
+    box-shadow:
+        6px 6px 14px var(--neu-dark),
+        -6px -6px 14px var(--neu-light);
     font-family: inherit;
 }
 
 .btn-login:hover {
-    background: linear-gradient(135deg, var(--primary-hover) 0%, var(--color-laranja) 100%);
-    box-shadow: 0 6px 18px rgba(245, 130, 32, 0.4);
-    transform: translateY(-1px);
+    box-shadow:
+        8px 8px 20px var(--neu-dark),
+        -8px -8px 20px var(--neu-light);
+    transform: translateY(-2px);
 }
 
 .btn-login:active {
+    box-shadow:
+        inset 4px 4px 10px rgba(0, 0, 0, 0.25),
+        inset -4px -4px 10px rgba(255, 255, 255, 0.15);
     transform: translateY(0);
 }
 
-/* Atalhos de Demonstração (Mostra) */
+/* --------------------------------------------------------------------------
+   Seção de Contas de Demonstração — separador sutil
+   -------------------------------------------------------------------------- */
 .login-demo-accounts {
     margin-top: 1.85rem;
     padding-top: 1.35rem;
-    border-top: 1px dashed var(--border);
+    border-top: 1px solid var(--border);
     font-size: 0.82rem;
     color: var(--text-muted);
 }
@@ -186,28 +258,36 @@ body {
     letter-spacing: 0.04em;
 }
 
+/* --------------------------------------------------------------------------
+   Lista de Demo — grid 2 colunas
+   -------------------------------------------------------------------------- */
 .demo-list {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 0.6rem;
 }
 
+/* --------------------------------------------------------------------------
+   Demo Item — raised neumórfico sutil
+   -------------------------------------------------------------------------- */
 .demo-item {
-    background-color: #FAF7F2;
-    border: 1px solid var(--border);
+    background-color: var(--neu-bg);
+    border: none;
     border-radius: var(--radius-sm);
-    padding: 0.5rem 0.65rem;
+    padding: 0.55rem 0.7rem;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: box-shadow 0.25s ease, transform 0.2s ease;
+    box-shadow: var(--shadow-raised-sm);
 }
 
 .demo-item:hover {
-    background-color: var(--primary-light);
-    border-color: var(--color-laranja);
-    transform: translateY(-1px);
-    box-shadow: 0 2px 8px rgba(245, 130, 32, 0.15);
+    box-shadow: var(--shadow-raised);
+    transform: translateY(-2px);
 }
 
+/* --------------------------------------------------------------------------
+   Demo Role e Email
+   -------------------------------------------------------------------------- */
 .demo-role {
     font-weight: 700;
     color: var(--color-laranja);
@@ -221,36 +301,79 @@ body {
     font-family: monospace;
 }
 
+/* --------------------------------------------------------------------------
+   Rodapé do Login — texto discreto em grafite claro
+   -------------------------------------------------------------------------- */
 .login-footer {
     text-align: center;
     margin-top: 1.75rem;
     font-size: 0.78rem;
-    color: var(--text-muted);
+    color: #999690;
 }
 
-/* Alertas */
+/* --------------------------------------------------------------------------
+   Alertas — raised neumórfico com cor de fundo suave
+   -------------------------------------------------------------------------- */
 .alert {
     padding: 0.85rem 1.15rem;
     border-radius: var(--radius-sm);
     margin-bottom: 1.35rem;
     font-size: 0.88rem;
     line-height: 1.4;
+    border: none;
+    box-shadow: var(--shadow-raised-sm);
 }
 
 .alert-danger {
-    background-color: #FEF2F2;
+    background-color: #F2DBD8;
     color: #991B1B;
-    border: 1px solid #FECACA;
 }
 
 .alert-warning {
-    background-color: #FFFBEB;
+    background-color: #EDE6D4;
     color: #92400E;
-    border: 1px solid #FDE68A;
 }
 
 .alert-info {
-    background-color: #FFF5EB;
+    background-color: #EDE0D4;
     color: #9A3412;
-    border: 1px solid #FED7AA;
+}
+
+/* --------------------------------------------------------------------------
+   Animações
+   -------------------------------------------------------------------------- */
+
+/* Entrada suave do card */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Respeitar preferência de movimento reduzido */
+@media (prefers-reduced-motion: reduce) {
+    .login-card {
+        animation: none;
+    }
+
+    .login-logo {
+        transition: none;
+    }
+
+    .form-control {
+        transition: none;
+    }
+
+    .btn-login {
+        transition: none;
+    }
+
+    .demo-item {
+        transition: none;
+    }
 }
